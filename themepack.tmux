@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
+set -e
+
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 theme_option="@theme"
 themedir_option="@themedir"
-
-default_theme='basic'
 
 get_tmux_option() {
   local option="$1"
@@ -20,11 +20,11 @@ get_tmux_option() {
 }
 
 main() {
-  local theme="$(get_tmux_option "$theme_option" "$default_theme")"
+  local theme="$(get_tmux_option "$theme_option")"
   local themedir="$(get_tmux_option "$themedir_option" "$CURRENT_DIR")"
 
   if [ -f "$themedir/${theme}.tmuxtheme" ]; then
-    tmux source-file "$theme_dir/${theme}.tmuxtheme"
+    tmux source-file "$themedir/${theme}.tmuxtheme"
   fi
 }
 
